@@ -1,8 +1,13 @@
-import Button from "./components/Button/index.js";
-import List from "./components/List/index.js";
+import route from "./utils/route.js";
+import "./utils/fertchapi.js";
+const handleHash = () => {
+  const hash = window.location.hash.substring(1);
+  route(hash);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
-  const myButton = new Button("secondary");
-  document.getElementById("app").appendChild(myButton.render());
-  const myList = new List();
-  document.getElementById("app").appendChild(myList.render());
+  history.replaceState(null, null, "#");
+  handleHash();
 });
+
+window.addEventListener("hashchange", handleHash);

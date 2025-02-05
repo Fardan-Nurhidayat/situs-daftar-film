@@ -1,20 +1,17 @@
 class Button {
-  constructor(variant = "primary") {
-    this.handleClick = this.handleClick.bind(this);
+  constructor(props) {
+    const { text, variant, onclick, disabled } = props;
+    this.onclick = onclick;
     this.variant = variant;
-  }
-
-  handleClick() {
-    if (this.variant === "primary") {
-      console.log("Primary button clicked");
-    } else {
-      console.log("button clicked");
-    }
+    this.text = text;
+    this.disabled = disabled;
   }
   render() {
     const button = document.createElement("button");
-    button.innerText = "Click me";
-    button.onclick = this.handleClick;
+    button.innerText = this.text;
+    button.className = "btn btn-" + this.variant;
+    button.onclick = this.onclick;
+    button.disabled = this.disabled;
     return button;
   }
 }
