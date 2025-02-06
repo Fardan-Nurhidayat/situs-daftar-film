@@ -2,9 +2,13 @@ import Button from "../Button/index.js";
 import Select from "../Select/index.js";
 class FilterMovie {
   constructor(props) {
-    const { submitFilter, isLoading } = props;
+    const { submitFilter, isLoading, setType, setYear, year, type } = props;
     this.submitFilter = submitFilter.bind(this);
     this.isLoading = isLoading;
+    this.setType = setType;
+    this.setYear = setYear;
+    this.year = year;
+    this.type = type;
     this.div = document.createElement("div");
   }
   render() {
@@ -18,15 +22,22 @@ class FilterMovie {
     });
     const select1 = new Select({
       options: [
-        { value: "title", label: "Title" },
-        { value: "genre", label: "Genre" },
+        { value: "", label: "Pilih Genre" },
+        { value: "Drama", label: "Drama" },
+        { value: "Romance", label: "Romance" },
+        { value: "Action", label: "Action" },
+        { value: "Comedy", label: "Comedy" },
+        { value: "Horror", label: "Horror" },
       ],
       width: "100px",
-      selectedValue: "title",
-      onchange: () => {},
+      selectedValue: this.type,
+      onchange: e => {
+        this.setType(e.target.value);
+      },
     });
     const select2 = new Select({
       options: [
+        { value: "", label: "Pilih Tahun" },
         { value: "2024", label: "2024" },
         { value: "2023", label: "2023" },
         { value: "2022", label: "2022" },
@@ -34,9 +45,11 @@ class FilterMovie {
         { value: "2020", label: "2020" },
         { value: "2019", label: "2019" },
       ],
-      width: "80px",
-      selectedValue: "title",
-      onchange: () => {},
+      width: "120px",
+      selectedValue: this.year,
+      onchange: e => {
+        this.setYear(e.target.value);
+      },
     });
     this.div.appendChild(select1.render());
     this.div.appendChild(select2.render());
