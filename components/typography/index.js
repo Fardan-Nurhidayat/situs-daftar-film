@@ -18,6 +18,7 @@ class Typography {
   render() {
     const container = document.createElement(this.variants[this.variant]);
     container.innerHTML = this.children;
+    // console.log(container);
     return container;
   }
 }

@@ -12,7 +12,6 @@ class FilterMovie {
     this.div = document.createElement("div");
   }
   render() {
-    // console.log(this.submitFilter);
     this.div.className = "filter-movie";
     const button = new Button({
       text: "Search",
