@@ -22,7 +22,7 @@ class Homepage {
 
   getDataMovie() {
     this.setState({ isLoading: true });
-    let urlPath = "titles";
+    let urlPath = "titles/x/upcoming?limit=4";
     if (this.state.filterType != "") {
       urlPath += `?genre=${this.state.filterType}`;
       if (this.state.filterYear != "") {
@@ -62,6 +62,12 @@ class Homepage {
     this.div.appendChild(h1.render());
     this.div.appendChild(filterMovie.render());
     // console.log(new MovieList({ movieItems: this.state.movieList }));
+    this.div.appendChild(
+      new Typography({
+        variant: "h1",
+        children: "Upcoming Movies",
+      }).render()
+    );
     this.div.appendChild(
       new MovieList({ movieItems: this.state.movieList }).render()
     );

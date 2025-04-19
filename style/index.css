@@ -33,3 +33,39 @@ body {
   display: flex;
   gap: 10px;
 }
+
+.movie-list {
+  display: flex;
+  overflow-x: scroll;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+/* .movie-list {
+  padding-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  grid-auto-rows: 5em;
+  gap: 0.5em;
+} */
+
+.movie-card {
+  border: 1px solid white;
+  width: 380px;
+  height: 720px;
+  padding: 4px;
+  border-radius: 20px;
+}
+
+.img-container {
+  min-height: 610px;
+  max-height: 610px;
+}
+
+.img-movie {
+  object-fit: cover;
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  height: 610px;
+}
