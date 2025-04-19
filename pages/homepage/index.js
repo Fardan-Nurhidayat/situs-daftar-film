@@ -11,6 +11,7 @@ class Homepage {
       filterType: "",
       filterYear: "",
       movieList: [],
+      page: 1,
     };
     this.div = document.createElement("div");
     this.init();
@@ -20,9 +21,9 @@ class Homepage {
     this.render();
   }
 
-  getDataMovie() {
+  getDataMovie(type = "get") {
     this.setState({ isLoading: true });
-    let urlPath = "titles/x/upcoming?limit=4";
+    let urlPath = `titles/x/upcoming?page=${this.state.page}&limit=4`;
     if (this.state.filterType != "") {
       urlPath += `?genre=${this.state.filterType}`;
       if (this.state.filterYear != "") {
@@ -32,8 +33,15 @@ class Homepage {
       urlPath += `?year=${this.state.filterYear}`;
     }
     fetchApi("GET", urlPath).then(result => {
-      console.log(result.results);
-      this.setState({ movieList: result.results });
+      // console.log(result.results);
+      if (type == "get") {
+        this.setState({ movieList: result.results });
+      } else {
+        this.setState({
+          movieList: [...this.state.movieList, ...result.results],
+        });
+        console.log(this.state.movieList);
+      }
       this.setState({ isLoading: false });
     });
   }
@@ -41,6 +49,12 @@ class Homepage {
   init() {
     this.getDataMovie();
     this.render();
+  }
+
+  loadHandler() {
+    this.setState({ isLoading: true });
+    this.setState({ page: this.state.page + 1 });
+    this.getDataMovie("load");
   }
 
   render() {
@@ -69,7 +83,10 @@ class Homepage {
       }).render()
     );
     this.div.appendChild(
-      new MovieList({ movieItems: this.state.movieList }).render()
+      new MovieList({
+        movieItems: this.state.movieList,
+        loadMoreAction: () => this.loadHandler(),
+      }).render()
     );
     // this.div.appendChild(button.render());
     return this.div;

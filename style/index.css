@@ -4,6 +4,7 @@ body {
   color: var(--primary-color);
   background-color: var(--primary-bg);
   font-family: var(--primary-font);
+  padding: 0 40px;
 }
 
 .btn {
@@ -36,7 +37,9 @@ body {
 
 .movie-list {
   display: flex;
-  overflow-x: scroll;
+  flex-wrap: wrap;
+  /* overflow-x: scroll; */
+  justify-content: space-between;
   gap: 1em;
   margin-top: 1em;
 }
@@ -68,4 +71,15 @@ body {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   height: 610px;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.load-more {
+  margin-top: 0.5em;
+  padding: 0.5em;
 }

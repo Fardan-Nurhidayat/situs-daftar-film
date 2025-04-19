@@ -1,8 +1,9 @@
 class Typography {
   constructor(props) {
-    const { variant, children } = props;
+    const { variant, children, className } = props;
     this.variant = variant;
     this.children = children;
+    this.className = className;
   }
 
   variants = {
@@ -17,6 +18,7 @@ class Typography {
   };
   render() {
     const container = document.createElement(this.variants[this.variant]);
+    container.className = this.className;
     container.innerHTML = this.children;
     // console.log(container);
     return container;
