@@ -40,7 +40,6 @@ class Homepage {
         this.setState({
           movieList: [...this.state.movieList, ...result.results],
         });
-        console.log(this.state.movieList);
       }
       this.setState({ isLoading: false });
     });
@@ -86,6 +85,7 @@ class Homepage {
       new MovieList({
         movieItems: this.state.movieList,
         loadMoreAction: () => this.loadHandler(),
+        isLoading: this.state.isLoading,
       }).render()
     );
     // this.div.appendChild(button.render());

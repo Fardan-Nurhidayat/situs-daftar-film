@@ -19,19 +19,24 @@ class MovieItems {
         className: "img-movie",
       }).render()
     );
+
     this.movieItemsContainer.appendChild(imgContainer);
-    this.movieItemsContainer.appendChild(
+
+    const infoContainer = document.createElement("div");
+    infoContainer.className = "info-film";
+    infoContainer.appendChild(
       new Typography({
         variant: "h4",
         children: this.movie.originalTitleText?.text,
       }).render()
     );
-    this.movieItemsContainer.appendChild(
+    infoContainer.appendChild(
       new Typography({
         variant: "h5",
         children: this.movie.releaseYear?.year,
       }).render()
     );
+    this.movieItemsContainer.appendChild(infoContainer);
     return this.movieItemsContainer;
   }
 }
