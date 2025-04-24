@@ -6,7 +6,9 @@ const handleHash = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  history.replaceState(null, null, "#");
+  if (window.location.hash === "") {
+    history.replaceState(null, null, "#");
+  }
   handleHash();
 });
 

@@ -46,8 +46,10 @@ class Homepage {
   }
 
   init() {
-    this.getDataMovie();
-    this.render();
+    if (window.location.hash === "") {
+      this.getDataMovie();
+      this.render();
+    }
   }
 
   loadHandler() {

@@ -58,6 +58,7 @@ body {
   height: 720px;
   padding: 4px;
   border-radius: 20px;
+  cursor: pointer;
 }
 
 .img-container {

@@ -6,6 +6,8 @@ class MovieItems {
     this.movie = movie;
     this.movieItemsContainer = document.createElement("div");
     this.movieItemsContainer.className = "movie-card";
+    this.movieItemsContainer.onclick = () =>
+      (location.hash = `detail?${this.movie.id}`);
   }
 
   render() {

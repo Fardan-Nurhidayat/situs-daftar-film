@@ -8,7 +8,7 @@ const pages = {
 const route = hash => {
   const app = document.getElementById("app");
   app.innerHTML = "";
-  const hasRoute = hash === "" ? "home" : hash;
+  const hasRoute = hash === "" ? "home" : hash.split("?")[0];
   const isAvailable = pages.hasOwnProperty(hasRoute);
   if (isAvailable) {
     app.appendChild(pages[hasRoute]);
