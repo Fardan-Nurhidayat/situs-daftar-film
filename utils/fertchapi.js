@@ -30,7 +30,7 @@ export const fetchApi = async (method, path) => {
       },
     });
     if (!response.ok) {
-      throw new Error(response.statusText);
+      throw new Error(response);
     }
     const result = await response.json();
     return result;

@@ -1,13 +1,15 @@
 import Button from "../../components/Button/index.js";
 import { fetchApi } from "../../utils/fertchapi.js";
-
+import Image from "../../components/Image/index.js";
 class Detailpage {
   constructor() {
     this.state = {
       selectedItem: {},
+      movieRate: {},
       isLoding: true,
     };
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
+    this.div = document.createElement("div");
     this.init();
   }
   handleClick() {
@@ -17,33 +19,43 @@ class Detailpage {
     this.getDataMovie();
     this.render();
   }
-
-  getDataMovie() {
-    const queryString = window.location.hash.split("?")[1];
-    console.log(queryString);
-    const urlPath = `titles/${queryString}`;
-    fetchApi("GET", urlPath).then(result => {
-      console.log(result.results);
-      this.setState({ isLoding: false });
-    });
-  }
-
   setState(newState) {
     this.state = { ...this.state, ...newState };
     this.render();
   }
+  async getDataMovie() {
+    const queryString = window.location.hash.split("?")[1];
+    const urlPath = `titles/${queryString}`;
+    console.log(urlPath);
+    await fetchApi("GET", urlPath).then(result => {
+      this.setState({ selectedItem: result.results });
+    });
+    // console.log(this.state.selectedItem);
+    const urlPathRating = `${urlPath}/ratings`;
+    await fetchApi("GET", urlPathRating).then(result => {
+      this.setState({ movieRate: result.results });
+    });
+    this.setState({ isLoding: false });
+  }
+
   render() {
-    const div = document.createElement("div");
+    this.div.innerHTML = "";
     const h1 = document.createElement("h1");
     h1.innerText = "Detailpage";
     const button = new Button({
-      text: "Go back",
+      text: this.state.selectedItem.id,
       variant: "secondary",
       onclick: this.handleClick,
     });
-    div.appendChild(h1);
-    div.appendChild(button.render());
-    return div;
+    this.div.appendChild(h1);
+    this.div.appendChild(button.render());
+    this.div.appendChild(
+      new Image({
+        src: this.state.selectedItem.primaryImage?.url,
+        alt: this.state.selectedItem.primaryImage?.caption?.plainText,
+      }).render()
+    );
+    return this.div;
   }
 }
 

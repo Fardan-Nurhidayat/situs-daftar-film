@@ -11,7 +11,6 @@ class MovieItems {
   }
 
   render() {
-    // console.log(this.movie);
     const imgContainer = document.createElement("div");
     imgContainer.className = "img-container";
     imgContainer.appendChild(
